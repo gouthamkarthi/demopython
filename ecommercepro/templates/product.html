@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+  {{pro.description}}
+{% endblock %}
+
+{% block title %}
+  {{pro.name}}
+{% endblock %}
+
+{% block content %}
+<div class="row my_prod_row_class">
+    <div class="mx_auto">
+        <p><a href="{% url  'ecommerceapp:Allprocate' %}">  Home</a>|<a href="{{pro.category.get_url}}">  {{pro.category}}</a>|  {{pro.name}}</p>
+    </div>
+</div>
+<div class="container">
+<br>
+<div class="row" >
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div class="min-width:18rem">
+        <img src="{{pro.image.url}}" alt="{{pro.name}}" width="100px">
+        </div>
+    </div>
+
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <div>
+        <h1  class="my_prod_title">{{pro.name}}</h1>
+        <p>$ {{pro.price}}</p>
+        <p class="my_prod_title">Product Description</p>
+        <p class="text-justify my_pro_des">{{pro.description}}</p>
+        {% if pro.stock <= 0 %}
+        <p class="text-justify my_pro_des btn btn-danger"><b>Out off Stock</b></p>
+        {% else %}
+        <a class="btn btn-secondary" href="{% url 'cartapp:add_cart' pro.id %}">Add to CART</a>
+        {% endif %}
+    </div>
+</div>
+</div>
+    </div>
+
+{% endblock %}
